@@ -19,7 +19,7 @@ class GetNeighbours(APIView):
         address = request.query_params.get('address', default='Москва')
         radius = int(request.query_params.get('radius', default=50))
 
-        # Определяет координаты по адресу через api Dadata
+        # Определяем координаты по адресу через api Dadata
         try:
             dadata = Dadata(settings.DADATA['TOKEN'],
                             settings.DADATA['SECRET'])

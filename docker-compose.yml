@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  nginx:
+    image: docker-nginx12220df2:latest
+    build:
+      context: .
+      dockerfile: deploy/nginx/Dockerfile
+    volumes:
+      - static_volume:/app/static
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - app
+      
+  app:
+    image: mygeoapp:latest
+    build: 
+      context: .
+      dockerfile: deploy/python/Dockerfile
+    volumes:
+      - static_volume:/app/static
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on: 
+      - db
+    env_file:
+      - .env
+
+  db:
+    image: kartoza/postgis:14
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  static_volume:
