@@ -29,4 +29,3 @@ class CityAdmin(OSMGeoAdmin):
                     'population',
                     'foundation_year'
                     )
-

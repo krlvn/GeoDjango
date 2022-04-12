@@ -24,7 +24,7 @@ class GetNeighbours(APIView):
             dadata = Dadata(settings.DADATA['TOKEN'],
                             settings.DADATA['SECRET'])
             result = dadata.clean('address', address)
-        except HTTPStatusError as err:
+        except HTTPStatusError:
             raise PermissionDenied('Ошибка аутентификации.')
 
         user_city_fields = {
