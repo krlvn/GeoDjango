@@ -1,10 +1,11 @@
-# myGeoApp
+# GeoDjango
 
 Пользователь вводит в форму адрес и радиус поиска в километрах. Через API геокодирования сервиса Dadata определяются координаты, и из базы данных выбираются все адреса находящиеся в окружности указанного пользователем адреса.
 
-Стек технологий:
-- Python 3.9 
-- Django 4 (Django Rest Framework)
+## Stack:
+- Python 3.10
+- Django 4.1.3
+- Django Rest Framework
 - PostgreSQL 14 (PostGis, GDAL)
 - OpenLayers (OpenStreetMap), JQuery
 - API Dadata
