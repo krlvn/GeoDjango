@@ -28,7 +28,7 @@ services:
 
   migration:
     image: geodjango-migration:latest
-    restart: no
+    restart: "no"
     env_file:
       - .env
     command: sh -c "python manage.py migrate && importcities cities"
