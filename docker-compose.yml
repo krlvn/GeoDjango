@@ -1,43 +1,42 @@
-version: '3'
+version: '3.7'
 
 services:
   nginx:
-    image: docker-nginx:latest
+    image: geodjango-nginx:latest
+    restart: always
     build:
       context: .
       dockerfile: deploy/nginx/Dockerfile
     volumes:
-      - static_volume:/app/static
-    restart: always
+      - ./public/static:/public/static
     ports:
       - 80:80
     depends_on:
       - app
-      
+
   app:
-    image: mygeoapp:latest
+    image: geodjango-app:latest
+    restart: always
+    env_file:
+      - .env
     build: 
       context: .
       dockerfile: deploy/python/Dockerfile
     volumes:
-      - static_volume:/app/static
-    restart: always
+      - ./public/static:/public/static
     ports:
       - 8000:8000
-    depends_on: 
+    depends_on:
       - db
-    env_file:
-      - .env
 
   db:
     image: kartoza/postgis:14
     restart: always
-    ports:
-      - 5432:5432
-    volumes:
-      - ./db:/var/lib/postgresql/data
     env_file:
       - .env
-
-volumes:
-  static_volume:
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

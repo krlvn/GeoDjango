@@ -1,4 +1,5 @@
-FROM python:3.9
+FROM python:3.10
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
@@ -6,13 +7,13 @@ WORKDIR /app
 # GDAL for GeoDjango
 RUN apt-get update && apt-get install -y gdal-bin
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY app/ .
 
-COPY . .
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Gunicorn
+RUN pip install --no-cache-dir Gunicorn
 EXPOSE 8000
 
-RUN python manage.py collectstatic --noinput
-
-CMD python manage.py migrate && uwsgi deploy/python/uwsgi.ini
+CMD python manage.py migrate --no-input; python manage.py collectstatic --no-input; python -m gunicorn config.wsgi:application --bind 0.0.0.0:8000

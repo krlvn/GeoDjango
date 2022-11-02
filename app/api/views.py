@@ -1,6 +1,6 @@
-from dadata import Dadata
 from httpx import HTTPStatusError
 
+from dadata import Dadata
 from django.conf import settings
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
@@ -13,17 +13,17 @@ from .models import City
 from .serializers import CitySerializer
 
 
-class GetNeighbours(APIView):
+class GetNeighboursView(APIView):
     def get(self, request):
-
-        address = request.query_params.get('address', default='Москва')
-        radius = int(request.query_params.get('radius', default=50))
+        address = request.GET.get('address', default='Москва')
+        radius = int(request.GET.get('radius', default=50))
 
         # Определяем координаты по адресу через api Dadata
         try:
             dadata = Dadata(settings.DADATA['TOKEN'],
                             settings.DADATA['SECRET'])
             result = dadata.clean('address', address)
+            print(result)
         except HTTPStatusError:
             raise PermissionDenied('Ошибка аутентификации.')
 

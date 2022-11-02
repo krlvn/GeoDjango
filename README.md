@@ -1,15 +1,31 @@
-# myGeoApp
+# What is this?
+This project demonstrates the capabilities of GeoDgango in conjunction with DRF and a third party API.
 
-Пользователь вводит в форму адрес и радиус поиска в километрах. Через API геокодирования сервиса Dadata определяются координаты, и из базы данных выбираются все адреса находящиеся в окружности указанного пользователем адреса.
+# How it works?
+The user enters an address and radius into the form. 
+After that, the app get coordinates from the geocoding API (dadata.ru) and all nearest addresses are shown on the map.
 
-Стек технологий:
-- Python 3.9 
-- Django 4 (Django Rest Framework)
+## Stack:
+- Python 3.10
+- Django 4.1.3
+- Django Rest Framework
 - PostgreSQL 14 (PostGis, GDAL)
 - OpenLayers (OpenStreetMap), JQuery
 - API Dadata
 
+## Installation without Docker:
+1. Get `token` and `secret` from `dadata.ru`
+2. Copy `example.env` to `.env`
+3. Install PostgreSQL 14 with PostGis and GDAL
+4. Run `pip install -r requirements.txt`
+5. Run `python manage.py migrate`
+6. Run `python manage.py importcities cities`
+7. Done!
 
-Файл `example.env` переименовать в `.env` и указать в нём API-ключ и секретный ключ сервиса Dadata.
-
-Развернуть контейнеры: `docker-compose up`
+## Installation with Docker:
+1. Get `token` and `secret` from `dadata.ru`
+2. Copy `example.env` to `.env`
+3. Run `docker-compose build`
+4. Run `docker-compose up -d`
+4. Run `docker-compose run app python manage.py importcities cities`
+5. Done!
