@@ -48,4 +48,4 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.SUCCESS(f'''Список городов из файла "data/{options['filename']}.csv" успешно импортирован.'''))
         except Exception as e:
-            raise CommandError(f'ERROR: {e}')
+            raise CommandError(e)
