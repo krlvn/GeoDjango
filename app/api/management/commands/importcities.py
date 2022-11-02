@@ -1,14 +1,10 @@
-from django.core.management.base import BaseCommand, CommandError
-from api.models import City
-
 import csv
-from pathlib import Path
 
-from django.contrib.gis.geos import Point
-from django.db import migrations
-
+from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
+from django.contrib.gis.geos import Point
 
+from api.models import City
 
 class Command(BaseCommand):
     help = 'Импорт списка городов из CSV файла.'
