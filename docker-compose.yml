@@ -27,10 +27,11 @@ services:
       - db
 
   migration:
-    image: geodjango-migration:latest
+    image: geodjango-app:latest
     restart: "no"
     env_file:
       - .env
+    build: .
     command: sh -c "
       python app/manage.py migrate --no-input
       && python app/manage.py migrate importcities cities
