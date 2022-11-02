@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.gis.admin import OSMGeoAdmin
 from .models import City
 
-
 @admin.register(City)
 class CityAdmin(OSMGeoAdmin):
     list_display = ('address',
