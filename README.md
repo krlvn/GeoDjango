@@ -1,5 +1,5 @@
 # What is this?
-This project demonstrates the capabilities of GeoDgango in conjunction with DRF and a third party API
+This project demonstrates the capabilities of GeoDgango in conjunction with DRF and a third party API.
 
 # How it works?
 The user enters an address and radius into the form. 
