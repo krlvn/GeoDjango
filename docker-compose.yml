@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: deploy/nginx/Dockerfile
+    volumes:
+      - ./public/static:/public/static
     ports:
       - 80:80
     depends_on:
@@ -20,22 +22,10 @@ services:
     build: 
       context: .
       dockerfile: deploy/python/Dockerfile
+    volumes:
+      - ./public/static:/public/static
     ports:
       - 8000:8000
-    depends_on:
-      - migration
-      - db
-
-  migration:
-    image: geodjango-app:latest
-    restart: "no"
-    env_file:
-      - .env
-    build: .
-    command: sh -c "
-      python app/manage.py migrate --no-input
-      && python app/manage.py migrate importcities cities
-      "
     depends_on:
       - db
 
@@ -45,6 +35,6 @@ services:
     env_file:
       - .env
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
     ports:
       - 5432:5432

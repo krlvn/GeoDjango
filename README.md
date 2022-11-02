@@ -27,4 +27,5 @@ After that, the app get coordinates from the geocoding API (dadata.ru) and all n
 2. Copy `example.env` to `.env`
 3. Run `docker-compose build`
 4. Run `docker-compose up -d`
+4. Run `docker-compose run app python manage.py importcities cities`
 5. Done!
