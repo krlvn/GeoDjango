@@ -22,7 +22,17 @@ services:
       dockerfile: deploy/python/Dockerfile
     ports:
       - 8000:8000
-    depends_on: 
+    depends_on:
+      - migration
+      - db
+
+  migration:
+    image: geodjango-migration:latest
+    restart: no
+    env_file:
+      - .env
+    command: sh -c "python manage.py migrate && importcities cities"
+    depends_on:
       - db
 
   db:

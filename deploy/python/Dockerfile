@@ -11,8 +11,6 @@ COPY app/ .
 
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python manage.py migrate
-RUN python manage.py importcities cities
 
 # Gunicorn
 RUN pip install --no-cache-dir Gunicorn
