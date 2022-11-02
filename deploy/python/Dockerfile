@@ -15,4 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Gunicorn
 RUN pip install --no-cache-dir Gunicorn
 EXPOSE 8000
-CMD python manage.py migrate --no-input ; python manage.py collectstatic --no-input ; python -m gunicorn config.wsgi:application --bind 0.0.0.0:8000
+
+CMD python manage.py migrate --no-input; python manage.py collectstatic --no-input; python -m gunicorn config.wsgi:application --bind 0.0.0.0:8000
