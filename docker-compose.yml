@@ -31,7 +31,10 @@ services:
     restart: "no"
     env_file:
       - .env
-    command: sh -c "python manage.py migrate && importcities cities"
+    command: sh -c "
+      python app/manage.py migrate --no-input
+      && python app/manage.py migrate importcities cities
+      "
     depends_on:
       - db
 
